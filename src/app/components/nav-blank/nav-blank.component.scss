@@ -1,0 +1,14 @@
+$main-color: #0aad0a;
+
+nav
+{
+    transition: padding 1s;
+}
+.change-color
+{
+    &:hover
+    {
+        background-color: $main-color;
+        color: white;
+    }
+}

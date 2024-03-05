@@ -1,0 +1,35 @@
+<section class="shadow  rounded p-4 my-4 bg-main-light">
+    <div class="w-75 mx-auto py-5">
+        
+        <h3 class="text-main">Check Out:</h3>
+        <form (submit)="submit()"  [formGroup]=" paymentForm">
+
+            <div class="mb-3">
+                <label>Address :</label>
+                <input formControlName="details" class="form-control">
+                <div *ngIf="paymentForm.get('details')?.errors && paymentForm.get('details')?.touched" class="alert alert-danger mt-2">
+                    <p *ngIf="paymentForm.get('details')?.errors?.['required']">Address Is Requierd</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>City :</label>
+                <input formControlName="city" class="form-control">
+                <div *ngIf="paymentForm.get('city')?.errors && paymentForm.get('city')?.touched" class="alert alert-danger mt-2">
+                    <p *ngIf="paymentForm.get('city')?.errors?.['required']">City Is Requierd</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Phone :</label>
+                <input  formControlName="phone" class="form-control">
+                <div *ngIf="paymentForm.get('phone')?.errors && paymentForm.get('phone')?.touched" class="alert alert-danger mt-2">
+                    <p *ngIf="paymentForm.get('phone')?.errors?.['required']">Phone Is Requierd</p>
+                    <p *ngIf="paymentForm.get('phone')?.errors?.['pattern']">Enter Valid Phone Number</p>
+                </div>
+            </div>
+
+            <button [disabled]="paymentForm.invalid" type="submit" class="main-btn text-white  d-block ms-auto p-2">Pay <i *ngIf="checkCorrectData" class="fa-solid fa-spinner fa-spin"></i></button>
+        </form>
+    </div>
+</section>

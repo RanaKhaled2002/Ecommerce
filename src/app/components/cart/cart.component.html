@@ -1,0 +1,35 @@
+<section *ngIf="cartItems;else msg">
+
+    <div>
+        <h1 class="py-2 text-center text-main">Total Price: {{totalPrice |  currency:'EGP'}}</h1>
+        <button (click)="clearCart()" class="btn btn-danger my-3 d-block ms-auto">Clear Cart</button>
+    </div>
+
+    <div  *ngFor="let item of cartItems" class="row py-5 align-items-center border-bottom shadow my-4 g-3">
+        <div class="col-md-3">
+            <img class="w-100" [src]="item.product?.imageCover" [alt]="item.product?.title">
+        </div>
+        <div class="col-md-7">
+            <h1 class="h5">{{$any(item.product?.title) | cuttext:2 }}</h1>
+            <span class="text-main fw-bold">{{item.product?.category?.name}}</span>
+            <div class="py-3">
+                <span>{{item.price|currency:"E£" }}</span>
+                <br>
+                <span><i class="fa-solid fa-star rating-color"></i> {{item.product?.ratingsAverage}}</span>
+            </div>
+            <i (click)="removeItme($any(item.product?._id))" class="fa-solid fa-trash text-danger cursor-pointer"></i>
+        </div>
+        <div class="col-md-2">
+            <i (click)="updateCart('plus',$any(item.count),$any(item.product?._id))" class="fa-solid cursor-pointer h4 fa-square-plus text-main"></i> {{item.count}}
+            <i (click)="updateCart('minus',$any(item.count),$any(item.product?._id))" class="fa-solid cursor-pointer h4 fa-square-minus text-main"></i>
+        </div>
+    </div>
+
+    <button [routerLink]="['/payment',cartId]" class="main-btn py-2 mb-3">Online Payment</button>
+    <button [routerLink]="['/cash',cartId]" class="main-btn py-2 mb-3 ms-4">Cash Payment</button>
+</section>
+
+<ng-template #msg>
+    <h2 class="text-center text-main">Your Cart Is Empty...</h2>
+</ng-template>
+

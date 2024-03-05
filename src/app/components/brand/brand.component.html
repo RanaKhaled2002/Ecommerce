@@ -1,0 +1,11 @@
+<section *ngIf="allBrands.length >= 1 ">
+    <h1 class="text-center text-main">All Brands</h1>
+    <div class="row g-4 py-4">
+        <div *ngFor="let brand of allBrands" class="col-md-4">
+            <div class="border brand-border">
+                <img class="w-100" [src]="brand.image" [alt]="brand.name">
+                <h1 class="h4 text-center text-main py-2">{{brand.name}}</h1>
+            </div>
+        </div>
+    </div>
+</section>

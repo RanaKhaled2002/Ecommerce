@@ -1,0 +1,39 @@
+<nav #navBar class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container">
+      <img class="cursor-pointer" src="./assets/images/freshcart-logo.svg" alt="logo">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between py-1" id="navbarNavAltMarkup">
+        <div  class="navbar-nav">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/home">Home</a>
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/product">Products</a>
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/cart">Cart</a>
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/category">Categories</a>
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/brand">Brands</a>
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/allorders">Orders</a>
+        </div>
+        <div  class="d-flex gap-3 align-items-center ms-auto navbar-nav py-1">
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-tiktok"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-linkedin"></i>
+          <i class="fa-brands fa-youtube"></i>
+          <i routerLink="cart"  class="fa-solid fa-cart-plus text-main cursor-pointer position-relative me-3"><span class="position-absolute start-100 bottom-100 badge bg-info">{{cartNumber}}</span></i>
+          <i routerLink="wishlist"  class="fa-solid fa-heart text-danger cursor-pointer position-relative me-3"><span class="position-absolute start-100 bottom-100 badge bg-info">{{wishlistNumber}}</span></i>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-primary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user text-primary"></i>
+            </a>
+            <ul class="dropdown-menu ">
+              <a routerLink="/changePassword" class="nav-link cursor-pointer change-color" role="button">change Password</a>
+              <li><hr class="dropdown-divider"></li>
+              <a (click)="logout()" class="nav-link cursor-pointer change-color" role="button">Logout</a>
+            </ul>
+          </li>
+        </div>
+      </div>
+    </div>
+</nav>

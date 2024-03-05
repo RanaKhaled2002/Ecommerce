@@ -1,0 +1,25 @@
+<section *ngIf="allCategories.length >= 1">
+    <div class="row g-5 py-3">
+        <h1 class="text-center text-main">All Categories</h1>
+        <div *ngFor="let category of allCategories" class="col-md-4">
+            <div class="category-border border text-center ">
+                <img (click)="getSpecificCategory($any(category._id))" data-bs-toggle="modal" data-bs-target="#exampleModal" height="500" class="w-75 d-block mx-auto py-2" [src]="category.image" [alt]="category.name">
+                <h1 class="h4 py-3 text-main">{{category.name}}</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        </div>
+            <div class="modal-body">
+                <img class="w-100" [src]="image" [alt]="name">
+                <h1 class="text-center text-main -h5">{{name}}</h1>
+            </div>
+        </div>
+    </div>
+</div>

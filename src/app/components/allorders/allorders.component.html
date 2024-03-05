@@ -1,0 +1,21 @@
+<section *ngIf="allOrders; else message">
+    <div *ngFor="let order of allOrders " class="row py-3 g-3">
+        <div class="col-md-12">
+           <div class="py-5 shadow">
+                <h1 class="h4 text-main text-center">Total Price:{{order.totalOrderPrice}}</h1>
+                <div class="row">
+                    <div *ngFor="let cart of order.cartItems" class="col-md-4">
+                        <div class="ms-3">
+                            <img   class="w-50 me-3"  [src]="cart.product?.imageCover">
+                            <h1  class="h6 text-main ps-3 my-2">{{$any(cart.product?.title) | cuttext:2}} </h1>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #message>
+    <h1 class="text-center text-main">No Orders Yet...</h1>
+</ng-template>

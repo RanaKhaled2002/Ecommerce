@@ -1,0 +1,97 @@
+<section class="shadow  rounded p-4 my-4 bg-main-light">
+    <div class="w-75 mx-auto py-5">
+        <form (ngSubmit)="submit()" [formGroup]="loginForm" class="py-5 my-2">
+            <h3 class="text-main">Login Now:</h3>
+            <div class="mb-3">
+                <label>Email</label>
+                <input formControlName="email" type="text" class="form-control">
+                <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="alert alert-danger mt-2">
+                    <p *ngIf="loginForm.get('email')?.errors?.['required']">Email Is Requierd</p>
+                    <p *ngIf="loginForm.get('email')?.errors?.['email']">Email Should Have @ & .</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control">
+                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="alert alert-danger mt-2">
+                    <p *ngIf="loginForm.get('password')?.errors?.['required']">Password Is Requierd</p>
+                    <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Minimum 8 characters, Maximum 16 characters, at least one capital letter , one number and one special character</p>
+                </div>
+            </div>
+            <h5 *ngIf="messageError" class="alert alert-danger">{{messageError}}</h5>
+
+            <div class="d-flex align-items-center justify-content-end gap-3">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="nav-link cursor-pointer">Forget Password</a>
+                <button [disabled]="loginForm.invalid" type="submit" class="main-btn text-white">Login <i *ngIf="correctData" class="fa-solid fa-spinner fa-spin"></i></button>
+            </div>
+        </form> 
+    </div>
+</section>
+
+  
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Forget Password</h1>
+        </div>
+            <div class="modal-body">
+                <!-- Form 1 -->
+                <form *ngIf="forgetPasswordFlag" (ngSubmit)="forgetPassword()" [formGroup]="forgetPasswordForm">
+                    <h3 class="text-main text-center">Enter Email Now:</h3>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input formControlName="email" type="text" class="form-control">
+                        <div *ngIf="forgetPasswordForm.get('email')?.errors && forgetPasswordForm.get('email')?.touched" class="alert alert-danger mt-2">
+                            <p *ngIf="forgetPasswordForm.get('email')?.errors?.['required']">Email Is Requierd</p>
+                            <p *ngIf="forgetPasswordForm.get('email')?.errors?.['email']">Email Should Have @ & .</p>
+                        </div>
+                    </div>
+                    <h5 *ngIf="forgetPasswordError" class="alert alert-danger">{{forgetPasswordError}}</h5>
+                    <button [disabled]="forgetPasswordForm.invalid" type="submit" class="main-btn text-white d-block ms-auto">Submit <i *ngIf="passwordCorrectData" class="fa-solid fa-spinner fa-spin"></i></button>
+                </form> 
+
+                <!-- Form 2 -->
+                <form *ngIf="verfiyPasswordFlag" (ngSubmit)="verfiyPassword()" [formGroup]="verfiyPasswordForm">
+                    <h3 class="text-main text-center">Enter Code Now:</h3>
+                    <div class="mb-3">
+                        <label>Code</label>
+                        <input formControlName="resetCode" type="text" class="form-control">
+                        <div *ngIf="verfiyPasswordForm.get('resetCode')?.errors && verfiyPasswordForm.get('resetCode')?.touched" class="alert alert-danger mt-2">
+                            <p *ngIf="verfiyPasswordForm.get('resetCode')?.errors?.['required']">Reset Code Is Requierd</p>
+                        </div>
+                    </div>
+                    <h5 *ngIf="verfiyPasswordError" class="alert alert-danger">{{verfiyPasswordError}}</h5>
+                    <button [disabled]="verfiyPasswordForm.invalid" type="submit" class="main-btn text-white d-block ms-auto">Submit <i *ngIf="verfiyCorrectData" class="fa-solid fa-spinner fa-spin"></i></button>
+                </form> 
+
+                <!-- Form 3 -->
+                <form *ngIf="resetPasswordFlag" (ngSubmit)="resetPassword()" [formGroup]="resetPasswordForm">
+                    <h3 class="text-main text-center">Enter New Password Now:</h3>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input formControlName="email" type="text" class="form-control">
+                        <div *ngIf="resetPasswordForm.get('email')?.errors && resetPasswordForm.get('email')?.touched" class="alert alert-danger mt-2">
+                            <p *ngIf="resetPasswordForm.get('email')?.errors?.['required']">Email Is Requierd</p>
+                            <p *ngIf="resetPasswordForm.get('email')?.errors?.['email']">Email Should Have @ & .</p>
+
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label>New Password</label>
+                        <input type="password" formControlName="newPassword" class="form-control">
+                        <div *ngIf="resetPasswordForm.get('newPassword')?.errors && resetPasswordForm.get('newPassword')?.touched" class="alert alert-danger mt-2">
+                            <p *ngIf="resetPasswordForm.get('newPassword')?.errors?.['required']">New Password Is Requierd</p>
+                            <p *ngIf="loginForm.get('newPassword')?.errors?.['pattern']">Minimum 8 characters, Maximum 16 characters, at least one capital letter , one number and one special character</p>
+
+                        </div>
+                    </div>
+                    <h5 *ngIf="resetPasswordError" class="alert alert-danger">{{resetPasswordError}}</h5>
+                    <h5 *ngIf="doneMessage" class="alert alert-success">{{doneMessage}}</h5>
+                    <button [disabled]="resetPasswordForm.invalid" type="submit" class="main-btn text-white d-block ms-auto">Submit <i *ngIf="resetCorrectData" class="fa-solid fa-spinner fa-spin"></i></button>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<section *ngIf="productDetails" class="shadow p-3 mb-3 rounded-3">
+    <div class="row  py-3 align-items-center">
+
+        <div class="col-md-3">
+            <owl-carousel-o [options]="imagesOptions">
+              <ng-container *ngFor="let images of productDetails.images">
+                <ng-template carouselSlide>
+                  <img class="w-100" [src]="images">
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+        </div>
+    
+        <div class="col-md-9">
+          <i *ngIf="!wishlist.includes($any(productDetails._id))" (click)="addToWishlist($any(productDetails._id))" class="fa-regular text-danger cursor-pointer fa-heart d-block me-auto pt-2 ps-2 py-2 wishlist fa-2x d-flex justify-content-end"></i>
+          <i *ngIf="wishlist.includes($any(productDetails._id))" (click)="removeFromWishList($any(productDetails._id))"   class="fa-solid text-danger cursor-pointer fa-heart d-block me-auto pt-2 ps-2 py-2 wishlist fa-2x d-flex justify-content-end"></i>
+            <h1 class="h4 text-main">{{productDetails.title}}</h1>
+            <p>{{productDetails.description}}</p>
+            <span>{{productDetails.category?.name}}</span>
+    
+            <div class="d-flex justify-content-between py-2">
+              <span>{{productDetails.price | currency:"EGP"}}</span>
+              <span><i [class.rating-color]="$any(productDetails.ratingsAverage)>=num" *ngFor="let num of [1,2,3,4,5]" class="fa-solid fa-star "></i>{{productDetails.ratingsAverage}}</span>
+            </div>
+    
+            <button #btnAdd (click)="addProduct($any(productDetails._id),btnAdd)" class="text-white main-btn w-100 my-2">Add To Cart</button>
+        </div>
+    </div>
+</section>
